@@ -1,13 +1,9 @@
 <template>
- 
-  <img
-    v-if="urlImagen" :src="urlImagen"
-    alt="no se puede mostrar imagen"
-  />
+  <img v-if="urlImagen" :src="urlImagen" alt="no se puede mostrar imagen" />
   <div class="dg_dark"></div>
   <div class="contenedor">
-     <h1>Caracola Mágica</h1>
-    <input v-model="pregunta" type="text" placeholder="Preguntame" />
+    <h1>Caracola Mágica</h1>
+    <input v-model="preguntaInput" type="text" placeholder="Preguntame" />
     <p>Recuerda terminar con un ? la pregunta</p>
     <div>
       <h2>{{ pregunta }}</h2>
@@ -21,6 +17,7 @@ export default {
   data() {
     return {
       pregunta: "",
+      preguntaInput: "",
       respuesta: "",
       urlImagen: null,
     };
@@ -37,10 +34,14 @@ export default {
     },
   },
   watch: {
-    pregunta(value, oldValue) {
+    preguntaInput(value, oldValue) {
       console.log(value);
       console.log(oldValue);
+      
       if (value.includes("?")) {
+        this.pregunta = this.preguntaInput
+        this.preguntaInput = ""
+        this.respuesta = "Pensando..."
         console.log("consumir el API");
         this.consumirApi();
       }
@@ -60,15 +61,12 @@ img,
   position: fixed;
   top: 0px;
 }
-
 .dg_dark {
   background-color: rgba(0, 0, 0, 0.445);
 }
-
 .contenedor {
   position: relative;
 }
-
 input {
   width: 250px;
   padding: 10px 15px;
@@ -76,18 +74,16 @@ input {
   border: none;
   outline: none;
 }
-
 p,
 h1,
 h2 {
   color: aliceblue;
 }
-h1{
-    margin-bottom: 100px;
+h1 {
+  margin-bottom: 100px;
 }
-
-p{
-    font-size: 25px;
-    margin-top: 10px;
+p {
+  font-size: 25px;
+  margin-top: 10px;
 }
 </style>
