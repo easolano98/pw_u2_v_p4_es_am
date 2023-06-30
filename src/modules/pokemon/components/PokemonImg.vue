@@ -38,7 +38,7 @@ export default {
 img {
   position: absolute;
   height: 200px;
-  right: 42%;
+  right: 44%;
 }
 
 .contenedor_imagen {
